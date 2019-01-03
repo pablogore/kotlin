@@ -23,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.kotlin.builtins.DefaultBuiltIns;
 import org.jetbrains.kotlin.descriptors.ClassDescriptor;
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor;
-import org.jetbrains.kotlin.descriptors.PackageFragmentDescriptor;
 import org.jetbrains.kotlin.descriptors.impl.DeclarationDescriptorVisitorEmptyBodies;
 import org.jetbrains.kotlin.idea.codeInsight.DescriptorToSourceUtilsIde;
 import org.jetbrains.kotlin.idea.navigation.GotoCheck;
@@ -31,6 +30,7 @@ import org.jetbrains.kotlin.idea.test.KotlinLightCodeInsightFixtureTestCase;
 import org.jetbrains.kotlin.idea.test.PluginTestCaseBase;
 import org.jetbrains.kotlin.idea.test.ProjectDescriptorWithStdlibSources;
 import org.jetbrains.kotlin.resolve.DescriptorUtils;
+import org.jetbrains.kotlin.resolve.scopes.MemberScope;
 import org.jetbrains.kotlin.test.InTextDirectivesUtils;
 
 import java.util.ArrayList;
@@ -83,11 +83,11 @@ public class BuiltInsReferenceResolverTest extends KotlinLightCodeInsightFixture
     }
 
     private static Collection<DeclarationDescriptor> getAllStandardDescriptors() {
-        final List<DeclarationDescriptor> descriptors = new ArrayList<DeclarationDescriptor>();
+        List<DeclarationDescriptor> descriptors = new ArrayList<>();
 
-        PackageFragmentDescriptor builtinsPackageFragment = DefaultBuiltIns.getInstance().getBuiltInsPackageFragment();
+        MemberScope builtIns = DefaultBuiltIns.getInstance().getBuiltInsPackageScope();
 
-        for (DeclarationDescriptor packageMember : DescriptorUtils.getAllDescriptors(builtinsPackageFragment.getMemberScope())) {
+        for (DeclarationDescriptor packageMember : DescriptorUtils.getAllDescriptors(builtIns)) {
             packageMember.acceptVoid(new DeclarationDescriptorVisitorEmptyBodies<Void, Void>() {
                 @Override
                 public Void visitClassDescriptor(ClassDescriptor descriptor, Void data) {
