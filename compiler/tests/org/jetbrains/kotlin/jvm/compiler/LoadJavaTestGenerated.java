@@ -293,9 +293,24 @@ public class LoadJavaTestGenerated extends AbstractLoadJavaTest {
                 runTest("compiler/testData/loadJava/compiledJava/annotations/AnnotatedMethod.java");
             }
 
+            @TestMetadata("AnnotatedParameterInEnumClassConstructor.java")
+            public void testAnnotatedParameterInEnumClassConstructor() throws Exception {
+                runTest("compiler/testData/loadJava/compiledJava/annotations/AnnotatedParameterInEnumClassConstructor.java");
+            }
+
             @TestMetadata("AnnotatedParameterInInnerClassConstructor.java")
             public void testAnnotatedParameterInInnerClassConstructor() throws Exception {
                 runTest("compiler/testData/loadJava/compiledJava/annotations/AnnotatedParameterInInnerClassConstructor.java");
+            }
+
+            @TestMetadata("AnnotatedTypeInEnumClassConstructor.java")
+            public void testAnnotatedTypeInEnumClassConstructor() throws Exception {
+                runTest("compiler/testData/loadJava/compiledJava/annotations/AnnotatedTypeInEnumClassConstructor.java");
+            }
+
+            @TestMetadata("AnnotatedTypeInInnerClassConstructor.java")
+            public void testAnnotatedTypeInInnerClassConstructor() throws Exception {
+                runTest("compiler/testData/loadJava/compiledJava/annotations/AnnotatedTypeInInnerClassConstructor.java");
             }
 
             @TestMetadata("AnnotatedValueParameter.java")
